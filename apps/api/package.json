@@ -2,8 +2,12 @@
   "name": "@prospectos/api", "private": true, "type": "module", "version": "0.1.0",
   "engines": { "node": ">=20" },
   "scripts": {
-    "dev": "tsx watch src/server.ts", "build": "tsc -p .", "start": "node dist/src/server.js", "worker": "tsx src/worker/index.ts", "start:worker": "node dist/src/worker/index.js",
-    "migrate": "tsx src/migrate.ts", "db:setup": "tsx src/migrate.ts", "hash-password": "tsx scripts/hash-password.ts",
+    "dev": "tsx watch src/server.ts",
+    "build": "esbuild src/server.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/server.mjs",
+    "start": "node dist/server.mjs",
+    "worker": "tsx src/worker/index.ts",
+    "migrate": "tsx src/migrate.ts", "db:setup": "tsx src/migrate.ts",
+    "hash-password": "tsx scripts/hash-password.ts",
     "typecheck": "tsc -p . --noEmit", "test": "vitest run"
   },
   "dependencies": {
@@ -12,6 +16,6 @@
     "mongodb": "^6.8.0", "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^20.14.0", "tsx": "^4.16.0", "typescript": "^5.5.0", "vitest": "^2.0.0"
+    "@types/node": "^20.14.0", "esbuild": "^0.21.5", "tsx": "^4.16.0", "typescript": "^5.5.0", "vitest": "^2.0.0"
   }
 }
