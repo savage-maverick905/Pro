@@ -27,7 +27,7 @@ const skipped = (reason: string): AnalyzeResult => ({ status: 'skipped', reason 
 const asArray = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
 
 async function addUnknown(reportId: string, note: string) {
-  await col('research_reports').updateOne({ _id: reportId }, { $push: { unknown_information: note } });
+  await col('research_reports').updateOne({ _id: reportId }, { $push: { unknown_information: note } as any });
 }
 
 export async function analyzeBusiness(businessId: string, opts: { depth: 'fast' | 'deep'; signal?: AbortSignal }): Promise<AnalyzeResult> {
